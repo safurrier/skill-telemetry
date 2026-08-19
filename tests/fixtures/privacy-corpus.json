@@ -1,0 +1,35 @@
+{
+  "rejected_identifiers": [
+    "codex.sk-proj-SECRET123",
+    "claude_code.github_pat_PRIVATE123",
+    "gen_ai.xoxb-PRIVATE123",
+    "runtime.ghp_PRIVATE123",
+    "source.glpat-PRIVATE123",
+    "local.bearer-private123",
+    "runtime.AKIA1234567890ABCD"
+  ],
+  "rejected_tokens": [
+    "codex.sk-proj-secret123",
+    "runtime.xoxb-private123",
+    "runtime.bearer-private123"
+  ],
+  "safe_identifiers": [
+    "claude_code.skill_activated",
+    "codex.conversation_starts",
+    "gen_ai.client.operation.duration",
+    "pi.skill.activation",
+    "example-capture",
+    "codex.skill-projection",
+    "github-pattern-review",
+    "xoxbridge"
+  ],
+  "safe_tokens": [
+    "explicit-command",
+    "otlp-log",
+    "provenance-missing",
+    "identity-redacted",
+    "runtime-telemetry",
+    "received",
+    "loaded"
+  ]
+}

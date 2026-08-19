@@ -1,0 +1,19 @@
+slug: add-user-auth
+branch: feat/add-user-auth
+created: 2026-01-15
+pr: 42
+status: complete
+source: feature-request
+contract_change: contract_changed
+decision_record: adr
+review_mode: external_required
+review_backend: subagent
+review_rubrics:
+  - core-quality
+  - docs-info-architecture
+evidence_required:
+  - commands
+  - report
+  - log
+continues_from:
+supersedes:

@@ -1,0 +1,33 @@
+{
+  "runtime_version": "0.144.5",
+  "schema_source": "codex app-server generate-json-schema CommandExecutionRequestApprovalParams",
+  "request": {
+    "jsonrpc": "2.0",
+    "method": "item/commandExecution/requestApproval",
+    "params": {
+      "threadId": "private-thread",
+      "turnId": "private-turn",
+      "itemId": "private-item",
+      "cwd": "__CWD__",
+      "commandActions": [
+        {
+          "type": "read",
+          "path": "__CANONICAL_SKILL__",
+          "name": "cat",
+          "command": "content-redacted"
+        },
+        {
+          "type": "read",
+          "path": "__UNRELATED_FILE__",
+          "name": "cat",
+          "command": "content-redacted"
+        }
+      ]
+    },
+    "timestamp": "2026-07-18T20:00:00Z"
+  },
+  "expected": {
+    "evidence_type": "canonical-file-read",
+    "signal_name": "codex.app_server.command_read"
+  }
+}

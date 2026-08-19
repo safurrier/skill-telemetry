@@ -1,0 +1,91 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tools]
+python = "3.12"
+uv = "latest"
+node = "22.19.0"
+
+[env]
+MISE_PROJECT_ROOT = "{{config_root}}"
+
+[tasks.setup]
+description = "Install Python development dependencies"
+run = "uv sync --all-extras"
+
+[tasks.fmt]
+description = "Format Python sources"
+run = "uv run ruff format ."
+
+[tasks.fmt-check]
+description = "Check Python formatting"
+run = "uv run ruff format --check ."
+
+[tasks.lint]
+description = "Lint Python sources"
+run = "uv run ruff check ."
+
+[tasks.typecheck]
+description = "Type-check Python sources"
+run = "uv run ty check src/skill_telemetry"
+
+[tasks.test]
+description = "Run Python tests"
+run = "uv run pytest"
+
+[tasks.public-history]
+description = "Reject private or unsafe objects reachable from public main"
+run = "uv run python -m scripts.verify_public_history --ref HEAD"
+
+[tasks.python-build]
+description = "Build and inspect Python wheel and sdist"
+run = "rm -rf dist && uv build && uv run python -m scripts.verify_artifacts"
+
+[tasks.node-install]
+description = "Install locked Node dependencies without lifecycle scripts"
+run = "npm ci --ignore-scripts"
+
+[tasks.node-check]
+description = "Install once, then test, type-check, and load the Pi package"
+depends = ["node-install"]
+run = "npm test && npm run build && npm run test:load"
+
+[tasks.version-contract]
+description = "Assert Python and Pi package metadata agree"
+run = "uv run pytest --no-cov tests/test_metadata.py"
+
+[tasks.check]
+description = "Run public-history, format, lint, type checks, and independent tests"
+depends = ["public-history", "fmt-check", "lint", "typecheck", "test", "node-check", "version-contract"]
+
+[tasks.build]
+description = "Build and inspect Python distribution artifacts"
+depends = ["python-build"]
+
+[tasks.ci]
+description = "Run the repository CI gate"
+depends = ["check"]
+
+[tasks.plan]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . plan"
+
+[tasks.plan-check]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . plan-check"
+
+[tasks.spec-check]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . spec-check"
+
+[tasks.evidence-check]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . evidence-check"
+
+[tasks.review-check]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . review-check"
+
+[tasks.sync-check]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . sync-check"
+
+[tasks.slice-status]
+run = "uv run --project .agent/skills/slice-workflow/cli python -m slice_workflow_cli --repo . status"
+
+[tasks.verify]
+description = "Run CI, then one Python artifact build and smoke proof"
+run = "mise run ci && mise run python-build"

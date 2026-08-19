@@ -1,0 +1,898 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skill-telemetry.local/schema/command-data-v1.json",
+  "description": "Closed discriminated v1 command data schemas.",
+  "$defs": {
+    "non_negative_integer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ratio": {
+      "type": "object",
+      "required": [
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "numerator": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "denominator": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "enum": [
+            "invalid-state-directory",
+            "state-unavailable",
+            "usage-aggregation-failed",
+            "invalid-doctor-input",
+            "collector-unavailable-or-invalid",
+            "invalid-listener-input",
+            "listener-unavailable",
+            "at-least-one---input-is-required",
+            "--skill-is-supported-only-for-ingest-codex",
+            "invalid-ingest-input",
+            "unsafe-or-invalid-input",
+            "storage-or-input-operation-failed",
+            "invalid-evaluation-input",
+            "evaluation-failed",
+            "evaluation-operation-failed",
+            "unsupported-command-or-option",
+            "invalid-command-input"
+          ]
+        }
+      }
+    },
+    "version": {
+      "type": "object",
+      "required": [
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "doctor": {
+      "type": "object",
+      "required": [
+        "collector",
+        "loopback_only",
+        "state_directory_mode"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "collector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "loopback_only": {
+          "const": true
+        },
+        "state_directory_mode": {
+          "type": "string",
+          "pattern": "^0o[0-7]+$"
+        }
+      }
+    },
+    "readout": {
+      "type": "object",
+      "required": [
+        "native_or_structured_activations",
+        "explicit_command_activations",
+        "prompt_expansions",
+        "structured_hook_activations",
+        "native_metric_events",
+        "aggregate_skill_invocations",
+        "file_read_evidence",
+        "natural_language_candidates",
+        "unsupported_or_redacted_events",
+        "unknown_runtime_telemetry_events",
+        "unknown_or_unobservable",
+        "skill_evidence_events",
+        "runtime_telemetry_events",
+        "total_events"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "native_or_structured_activations": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "explicit_command_activations": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "prompt_expansions": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "structured_hook_activations": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "native_metric_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "aggregate_skill_invocations": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "file_read_evidence": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "natural_language_candidates": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "unsupported_or_redacted_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "unknown_runtime_telemetry_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "unknown_or_unobservable": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "skill_evidence_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "runtime_telemetry_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "total_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        }
+      }
+    },
+    "usage_group_common": {
+      "type": "object",
+      "properties": {
+        "token_type": {
+          "enum": [
+            "input",
+            "cached_input",
+            "output",
+            "reasoning_output",
+            "total"
+          ]
+        },
+        "unit": {
+          "const": ""
+        },
+        "count": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bucket_counts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 513,
+          "items": {
+            "$ref": "#/$defs/non_negative_integer"
+          }
+        },
+        "explicit_bounds": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "type": "number"
+          }
+        },
+        "source_points": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "usage_delta_group": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usage_group_common"
+        },
+        {
+          "required": [
+            "token_type",
+            "unit",
+            "aggregation_temporality",
+            "count",
+            "sum",
+            "bucket_counts",
+            "explicit_bounds",
+            "source_points"
+          ],
+          "unevaluatedProperties": false,
+          "properties": {
+            "aggregation_temporality": {
+              "const": "delta"
+            }
+          }
+        }
+      ]
+    },
+    "usage_cumulative_group": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usage_group_common"
+        },
+        {
+          "required": [
+            "token_type",
+            "unit",
+            "aggregation_temporality",
+            "start_time_unix_nano",
+            "time_unix_nano",
+            "count",
+            "sum",
+            "bucket_counts",
+            "explicit_bounds",
+            "source_points"
+          ],
+          "unevaluatedProperties": false,
+          "properties": {
+            "aggregation_temporality": {
+              "const": "cumulative"
+            },
+            "start_time_unix_nano": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "time_unix_nano": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      ]
+    },
+    "usage": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "metric_name",
+        "metric_kind",
+        "points",
+        "summarized_points",
+        "unspecified_temporality_points_excluded",
+        "histogram_groups",
+        "summary_total_semantics",
+        "aggregation_temporalities",
+        "units",
+        "dimension_availability"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "metric_name": {
+          "const": "codex.turn.token_usage"
+        },
+        "metric_kind": {
+          "const": "histogram"
+        },
+        "points": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "summarized_points": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "unspecified_temporality_points_excluded": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "histogram_groups": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/usage_delta_group"
+              },
+              {
+                "$ref": "#/$defs/usage_cumulative_group"
+              }
+            ]
+          },
+          "maxItems": 50000
+        },
+        "summary_total_semantics": {
+          "const": "native-total-only; present only for one compatible token-unit total group"
+        },
+        "aggregation_temporalities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "unspecified",
+              "delta",
+              "cumulative"
+            ]
+          }
+        },
+        "units": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "const": ""
+          }
+        },
+        "dimension_availability": {
+          "type": "object",
+          "required": [
+            "token_type",
+            "model_identity",
+            "pricing",
+            "session_attribution",
+            "cost",
+            "other_metric_attributes"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "token_type": {
+              "const": "available"
+            },
+            "model_identity": {
+              "const": "unavailable-not-retained"
+            },
+            "pricing": {
+              "const": "unavailable-no-pricing-source"
+            },
+            "session_attribution": {
+              "const": "unavailable-not-emitted-or-retained"
+            },
+            "cost": {
+              "const": "unavailable-not-estimated"
+            },
+            "other_metric_attributes": {
+              "const": "unavailable-not-retained"
+            }
+          }
+        },
+        "summary_total_tokens": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "ingest": {
+      "type": "object",
+      "required": [
+        "agent_system",
+        "files_scanned",
+        "records_scanned",
+        "telemetry_records",
+        "imported",
+        "duplicates",
+        "rejected",
+        "dry_run"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "agent_system": {
+          "enum": [
+            "pi",
+            "codex"
+          ]
+        },
+        "files_scanned": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "records_scanned": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "telemetry_records": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "imported": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "duplicates": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "rejected": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "malformed_records_skipped": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "limit_status": {
+          "enum": [
+            "max-live-descriptors",
+            "max-file-bytes",
+            "max-discovery-bytes",
+            "max-files",
+            "max-total-bytes",
+            "max-traversal-entries",
+            "max-directories",
+            "max-depth",
+            "max-json-depth",
+            "max-json-string-bytes",
+            "max-structured-records",
+            "max-top-level-records",
+            "max-jsonl-line-bytes",
+            "max-normalized-batch-bytes",
+            "max-codex-skills",
+            "max-codex-skill-file-bytes",
+            "max-codex-skill-total-bytes"
+          ]
+        },
+        "dry_run": {
+          "type": "boolean"
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "runtime",
+        "runtime_version",
+        "invocation_type",
+        "evidence_stage",
+        "status",
+        "raw_events",
+        "unique_events",
+        "duplicates_removed",
+        "missing_required",
+        "forbidden_observed",
+        "wrong_skill_observed",
+        "unrecognized_evidence_stages",
+        "unobservable_outcomes",
+        "unsupported_acknowledged"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime": {
+          "enum": [
+            "pi",
+            "codex",
+            "claude"
+          ]
+        },
+        "runtime_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "invocation_type": {
+          "enum": [
+            "explicit",
+            "implicit",
+            "natural-language",
+            "negative-control",
+            "resume-reimport",
+            "model-selected"
+          ]
+        },
+        "evidence_stage": {
+          "enum": [
+            "activation",
+            "candidate-to-load",
+            "aggregate-activation",
+            "named-hook",
+            "native-event"
+          ]
+        },
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "unobservable"
+          ]
+        },
+        "raw_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "unique_events": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "duplicates_removed": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "missing_required": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 64,
+          "items": {
+            "enum": [
+              "explicit-command",
+              "structured-input",
+              "structured-hook",
+              "native-event",
+              "native-metric",
+              "natural-language-candidate",
+              "canonical-file-read",
+              "provenance-error",
+              "native-skill-identity",
+              "unsupported-evidence-stage"
+            ]
+          }
+        },
+        "forbidden_observed": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 64,
+          "items": {
+            "enum": [
+              "explicit-command",
+              "structured-input",
+              "structured-hook",
+              "native-event",
+              "native-metric",
+              "natural-language-candidate",
+              "canonical-file-read",
+              "provenance-error",
+              "native-skill-identity",
+              "unsupported-evidence-stage"
+            ]
+          }
+        },
+        "wrong_skill_observed": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 64,
+          "items": {
+            "enum": [
+              "explicit-command",
+              "structured-input",
+              "structured-hook",
+              "native-event",
+              "native-metric",
+              "natural-language-candidate",
+              "canonical-file-read",
+              "provenance-error",
+              "native-skill-identity",
+              "unsupported-evidence-stage"
+            ]
+          }
+        },
+        "unrecognized_evidence_stages": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 64,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9.-]{0,63}$"
+          }
+        },
+        "unobservable_outcomes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 64,
+          "items": {
+            "enum": [
+              "explicit-command",
+              "structured-input",
+              "structured-hook",
+              "native-event",
+              "native-metric",
+              "natural-language-candidate",
+              "canonical-file-read",
+              "provenance-error",
+              "native-skill-identity",
+              "unsupported-evidence-stage"
+            ]
+          }
+        },
+        "unsupported_acknowledged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": [
+        "observed",
+        "required",
+        "required_matched",
+        "forbidden_observed",
+        "precision",
+        "recall",
+        "unknown_rate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "observed": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "required": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "required_matched": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "forbidden_observed": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "precision": {
+          "$ref": "#/$defs/ratio"
+        },
+        "recall": {
+          "$ref": "#/$defs/ratio"
+        },
+        "unknown_rate": {
+          "$ref": "#/$defs/ratio"
+        }
+      }
+    },
+    "producer_check": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "passed",
+            "failed"
+          ]
+        },
+        "remediation": {
+          "const": "Repair the reported producer check in repository CI."
+        }
+      }
+    },
+    "evaluate": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "campaign_id",
+        "passed",
+        "gates",
+        "metrics",
+        "cases"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "gates": {
+          "type": "object",
+          "properties": {
+            "supported_explicit_precision_100": {
+              "type": "boolean"
+            },
+            "supported_explicit_recall_100": {
+              "type": "boolean"
+            },
+            "zero_false_positives": {
+              "type": "boolean"
+            },
+            "pi_candidate_to_load_100": {
+              "type": "boolean"
+            },
+            "pi_correlation_quality_100": {
+              "type": "boolean"
+            },
+            "duplicate_events_do_not_inflate": {
+              "type": "boolean"
+            },
+            "resume_reimport_no_double_count": {
+              "type": "boolean"
+            },
+            "no_unexplained_provenance_errors": {
+              "type": "boolean"
+            },
+            "unobservable_evidence_explicit": {
+              "type": "boolean"
+            },
+            "required_evidence_supported": {
+              "type": "boolean"
+            },
+            "pi-extension-tests": {
+              "type": "boolean"
+            },
+            "pi-extension-build": {
+              "type": "boolean"
+            },
+            "pi-extension-load": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "required": [
+                    "supported_explicit_precision_100",
+                    "supported_explicit_recall_100",
+                    "zero_false_positives",
+                    "pi_candidate_to_load_100",
+                    "pi_correlation_quality_100",
+                    "duplicate_events_do_not_inflate",
+                    "resume_reimport_no_double_count",
+                    "no_unexplained_provenance_errors",
+                    "unobservable_evidence_explicit"
+                  ]
+                },
+                {
+                  "required": [
+                    "required_evidence_supported",
+                    "zero_false_positives",
+                    "no_unexplained_provenance_errors",
+                    "unobservable_evidence_explicit"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "metrics": {
+          "type": "object",
+          "required": [
+            "supported_explicit_precision",
+            "supported_explicit_recall",
+            "unknown_rate",
+            "deduplication",
+            "candidate_to_load_conversion",
+            "correlation_quality",
+            "false_positives",
+            "provenance_errors",
+            "stages"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "supported_explicit_precision": {
+              "$ref": "#/$defs/ratio"
+            },
+            "supported_explicit_recall": {
+              "$ref": "#/$defs/ratio"
+            },
+            "unknown_rate": {
+              "$ref": "#/$defs/ratio"
+            },
+            "deduplication": {
+              "type": "object",
+              "required": [
+                "raw_events",
+                "unique_events",
+                "duplicates_removed"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "raw_events": {
+                  "$ref": "#/$defs/non_negative_integer"
+                },
+                "unique_events": {
+                  "$ref": "#/$defs/non_negative_integer"
+                },
+                "duplicates_removed": {
+                  "$ref": "#/$defs/non_negative_integer"
+                }
+              }
+            },
+            "candidate_to_load_conversion": {
+              "$ref": "#/$defs/ratio"
+            },
+            "correlation_quality": {
+              "$ref": "#/$defs/ratio"
+            },
+            "false_positives": {
+              "$ref": "#/$defs/non_negative_integer"
+            },
+            "provenance_errors": {
+              "$ref": "#/$defs/non_negative_integer"
+            },
+            "stages": {
+              "type": "object",
+              "properties": {
+                "explicit-command": {
+                  "$ref": "#/$defs/stage"
+                },
+                "structured-input": {
+                  "$ref": "#/$defs/stage"
+                },
+                "structured-hook": {
+                  "$ref": "#/$defs/stage"
+                },
+                "native-event": {
+                  "$ref": "#/$defs/stage"
+                },
+                "native-metric": {
+                  "$ref": "#/$defs/stage"
+                },
+                "natural-language-candidate": {
+                  "$ref": "#/$defs/stage"
+                },
+                "canonical-file-read": {
+                  "$ref": "#/$defs/stage"
+                },
+                "provenance-error": {
+                  "$ref": "#/$defs/stage"
+                },
+                "native-skill-identity": {
+                  "$ref": "#/$defs/stage"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/case"
+          },
+          "maxItems": 128,
+          "minItems": 1
+        },
+        "producer_checks": {
+          "type": "object",
+          "properties": {
+            "pi-extension-tests": {
+              "$ref": "#/$defs/producer_check"
+            },
+            "pi-extension-build": {
+              "$ref": "#/$defs/producer_check"
+            },
+            "pi-extension-load": {
+              "$ref": "#/$defs/producer_check"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "serve": {
+      "type": "object",
+      "required": [
+        "host",
+        "port",
+        "external_export",
+        "foreground"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "external_export": {
+          "const": false
+        },
+        "foreground": {
+          "const": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "campaign_id": "cross-runtime-skill-acceptance-v1",
+  "cases": {
+    "pi-explicit": {
+      "producer": "pi-session",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.activation",
+            "agent_system": "pi",
+            "session_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "turn_id": "sha256:2111111111111111111111111111111111111111111111111111111111111111",
+            "activation_id": "sha256:3111111111111111111111111111111111111111111111111111111111111111",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "explicit-command",
+            "evidence_type": "explicit-command",
+            "evidence_confidence": "observed",
+            "status": "loaded",
+            "timestamp": "2026-07-18T20:00:00Z"
+          }
+        }
+      ]
+    },
+    "pi-candidate-load": {
+      "producer": "pi-session",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.candidate",
+            "agent_system": "pi",
+            "session_id": "sha256:1222222222222222222222222222222222222222222222222222222222222222",
+            "turn_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "activation_id": "sha256:3222222222222222222222222222222222222222222222222222222222222222",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "natural-language",
+            "evidence_type": "natural-language-candidate",
+            "evidence_confidence": "candidate",
+            "status": "candidate",
+            "timestamp": "2026-07-18T20:01:00Z"
+          }
+        },
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.candidate",
+            "agent_system": "pi",
+            "session_id": "sha256:1222222222222222222222222222222222222222222222222222222222222222",
+            "turn_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "activation_id": "sha256:3222222222222222222222222222222222222222222222222222222222222222",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "natural-language",
+            "evidence_type": "natural-language-candidate",
+            "evidence_confidence": "candidate",
+            "status": "candidate",
+            "timestamp": "2026-07-18T20:01:00Z"
+          }
+        },
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.execution",
+            "agent_system": "pi",
+            "session_id": "sha256:1222222222222222222222222222222222222222222222222222222222222222",
+            "turn_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "activation_id": "sha256:4222222222222222222222222222222222222222222222222222222222222222",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "model-read",
+            "evidence_type": "canonical-file-read",
+            "evidence_confidence": "qualified",
+            "status": "loaded",
+            "timestamp": "2026-07-18T20:01:01Z"
+          }
+        }
+      ]
+    },
+    "pi-negative-control": {
+      "producer": "pi-session",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "type": "message",
+          "message": {
+            "role": "user",
+            "content": "sanitized negative control"
+          }
+        }
+      ]
+    },
+    "pi-resume-reimport": {
+      "producer": "pi-session",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.activation",
+            "agent_system": "pi",
+            "session_id": "sha256:1555555555555555555555555555555555555555555555555555555555555555",
+            "turn_id": "sha256:2555555555555555555555555555555555555555555555555555555555555555",
+            "activation_id": "sha256:3555555555555555555555555555555555555555555555555555555555555555",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "explicit-command",
+            "evidence_type": "explicit-command",
+            "evidence_confidence": "observed",
+            "status": "loaded",
+            "timestamp": "2026-07-18T20:01:30Z"
+          }
+        },
+        {
+          "type": "custom",
+          "customType": "skill-telemetry-v1",
+          "data": {
+            "schema_version": 1,
+            "event_name": "agent.skill.activation",
+            "agent_system": "pi",
+            "session_id": "sha256:1555555555555555555555555555555555555555555555555555555555555555",
+            "turn_id": "sha256:2555555555555555555555555555555555555555555555555555555555555555",
+            "activation_id": "sha256:3555555555555555555555555555555555555555555555555555555555555555",
+            "skill_name": "example-capture",
+            "skill_source": "pi-runtime",
+            "trigger": "explicit-command",
+            "evidence_type": "explicit-command",
+            "evidence_confidence": "observed",
+            "status": "loaded",
+            "timestamp": "2026-07-18T20:01:30Z"
+          }
+        }
+      ]
+    },
+    "codex-metric-explicit": {
+      "producer": "codex-metric",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "skill": "example-capture",
+          "invoke_type": "explicit",
+          "status": "success",
+          "count": 1,
+          "time_unix_nano": 1750000000000000000
+        }
+      ]
+    },
+    "codex-metric-implicit-read": {
+      "producer": "codex-metric",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "skill": "example-capture",
+          "invoke_type": "implicit",
+          "status": "success",
+          "count": 1,
+          "time_unix_nano": 1750000000000001000
+        }
+      ]
+    },
+    "codex-metric-implicit-script": {
+      "producer": "codex-metric",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "skill": "example-capture",
+          "invoke_type": "implicit",
+          "status": "success",
+          "count": 1,
+          "time_unix_nano": 1750000000000002000
+        }
+      ]
+    },
+    "codex-metric-batched-delta": {
+      "producer": "codex-metric",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "skill": "example-capture",
+          "invoke_type": "explicit",
+          "status": "success",
+          "count": 3,
+          "time_unix_nano": 1750000000000003000
+        },
+        {
+          "skill": "example-capture",
+          "invoke_type": "explicit",
+          "status": "success",
+          "count": 3,
+          "time_unix_nano": 1750000000000003000
+        }
+      ]
+    },
+    "codex-negative-control": {
+      "producer": "codex-metric",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "name": "codex.unrelated",
+          "skill": "example-capture",
+          "invoke_type": "explicit",
+          "status": "success",
+          "count": 1,
+          "time_unix_nano": 1750000000000004000
+        }
+      ]
+    },
+    "codex-unknown-skill-control": {
+      "producer": "codex-adapter",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "method": "turn/start",
+          "params": {
+            "threadId": "neutral-thread",
+            "turnId": "neutral-turn",
+            "input": [
+              {
+                "type": "skill",
+                "name": "not a skill"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "codex-unrelated-file-control": {
+      "producer": "codex-ingest",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "method": "turn/start",
+          "params": {
+            "threadId": "neutral-thread",
+            "turnId": "neutral-turn",
+            "commandActions": [
+              {
+                "type": "read",
+                "path": "unrelated.txt"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "codex-unrelated-script-control": {
+      "producer": "codex-ingest",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "method": "turn/start",
+          "params": {
+            "threadId": "neutral-thread",
+            "turnId": "neutral-turn",
+            "commandActions": [
+              {
+                "type": "exec",
+                "command": "true"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "claude-hook-explicit": {
+      "producer": "claude-hook",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "hook_event_name": "UserPromptExpansion",
+          "command_name": "example-writing",
+          "command_source": "plugin",
+          "session_id": "sanitized-session",
+          "prompt_id": "sanitized-prompt",
+          "invocation_trigger": "user-slash"
+        },
+        {
+          "hook_event_name": "UserPromptExpansion",
+          "command_name": "example-writing",
+          "command_source": "plugin",
+          "session_id": "sanitized-session",
+          "prompt_id": "sanitized-prompt",
+          "invocation_trigger": "user-slash"
+        }
+      ]
+    },
+    "claude-hook-structured": {
+      "producer": "claude-hook",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "hook_event_name": "PreToolUse",
+          "tool_name": "Skill",
+          "tool_input": {
+            "skill": "example-writing",
+            "invocation_trigger": "claude-proactive"
+          },
+          "session_id": "sanitized-session",
+          "prompt_id": "sanitized-prompt-2",
+          "tool_use_id": "sanitized-tool"
+        }
+      ]
+    },
+    "claude-non-skill-command": {
+      "producer": "claude-hook",
+      "unsupported_outcomes": [],
+      "records": [
+        {
+          "hook_event_name": "UserPromptExpansion",
+          "command_name": "example-send",
+          "command_source": "plugin",
+          "session_id": "negative-session",
+          "prompt_id": "negative-prompt"
+        }
+      ]
+    },
+    "claude-native-redacted": {
+      "producer": "claude-adapter",
+      "unsupported_outcomes": [
+        "native-skill-identity"
+      ],
+      "records": [
+        {
+          "event_name": "claude_code.skill_activated",
+          "timestamp": "2026-07-18T20:03:00Z",
+          "attributes": {
+            "session.id": "sanitized-session",
+            "skill_name": "custom_skill",
+            "invocation_trigger": "user-slash"
+          }
+        }
+      ]
+    }
+  }
+}

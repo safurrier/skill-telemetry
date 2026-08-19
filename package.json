@@ -1,0 +1,23 @@
+{
+  "name": "pi-skill-telemetry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "keywords": ["pi-package"],
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test pi/tests/*.test.ts",
+    "test:load": "node --experimental-strip-types pi/tests/package-load-smoke.ts"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.84.2",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "pi": {
+    "extensions": ["./pi/src/index.ts"]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "explicit_activation": {
+    "schema_version": 1,
+    "event_name": "agent.skill.activation",
+    "agent_system": "pi",
+    "session_id": "sha256:2c4d523b9762a1bec8c1c4abb9be05c66741f1b9b5f5468472c83a6ab922858e",
+    "turn_id": "sha256:6143f940c8ef973f00ea9b0e2de17ec467c375353e7800e4ee2e59886d6c9111",
+    "activation_id": "sha256:77309d3c83ad8b073f786ee135530e75abe2d7edf0b3fbe4aad85ccc807d21c0",
+    "skill_name": "example-capture",
+    "skill_source": "pi-runtime",
+    "skill_content_hash": "sha256:f16d05ec6b29248d2c61adb1e9263f78e4f7bace1b955014a2d17872cfe4064d",
+    "trigger": "explicit-command",
+    "evidence_type": "explicit-command",
+    "evidence_confidence": "observed",
+    "status": "loaded",
+    "timestamp": "2026-08-19T00:00:00.000Z"
+  },
+  "prompt_command": {
+    "schema_version": 1,
+    "event_name": "agent.skill.activation",
+    "agent_system": "pi",
+    "session_id": "sha256:2c4d523b9762a1bec8c1c4abb9be05c66741f1b9b5f5468472c83a6ab922858e",
+    "turn_id": "sha256:6143f940c8ef973f00ea9b0e2de17ec467c375353e7800e4ee2e59886d6c9111",
+    "activation_id": "sha256:66045a4d19e578479ec4f89c4f53a67470a585cd78d47717973670ff74b798f8",
+    "skill_name": "example-capture",
+    "skill_source": "prompt-command",
+    "trigger": "prompt-command",
+    "evidence_type": "prompt-expansion",
+    "evidence_confidence": "observed",
+    "status": "expanded",
+    "timestamp": "2026-08-19T00:00:00.000Z"
+  },
+  "inventory_failure": {
+    "schema_version": 1,
+    "event_name": "agent.skill.failure",
+    "agent_system": "pi",
+    "session_id": "sha256:2c4d523b9762a1bec8c1c4abb9be05c66741f1b9b5f5468472c83a6ab922858e",
+    "turn_id": "sha256:6143f940c8ef973f00ea9b0e2de17ec467c375353e7800e4ee2e59886d6c9111",
+    "activation_id": "sha256:73a128b36f2d41c054d32b95b82ee080d3daf07a881ef9d65de28b3c96adfba7",
+    "skill_name": "example-capture",
+    "skill_source": "pi-runtime",
+    "trigger": "inventory",
+    "evidence_type": "provenance-error",
+    "evidence_confidence": "unknown",
+    "status": "provenance-missing",
+    "timestamp": "2026-08-19T00:00:00.000Z"
+  }
+}

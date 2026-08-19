@@ -1,0 +1,1 @@
+{"aggregation_temporality":"cumulative","bucket_counts":[1,1],"count":2,"explicit_bounds":[10.0],"metric_kind":"histogram","metric_name":"codex.turn.token_usage","schema_version":1,"start_time_unix_nano":99,"sum":12.0,"time_unix_nano":100,"token_type":"total","unit":""}

@@ -1,0 +1,30 @@
+{
+  "pi_produced_event": {
+    "schema_version": 1,
+    "event_name": "agent.skill.activation",
+    "agent_system": "pi",
+    "session_id": "sha256:7b94696edb6cbff9c49e1604b9d502ea43f46f36b33ccdf49eccda14445c0c3c",
+    "turn_id": "sha256:e3a4ab9030171f9cc8b676dc59507db3d0084f9acdb5b5243213c3c19e4dad72",
+    "activation_id": "sha256:ca2932197d7ba4d1d1899ede51d781e96400b0a86e8d86c39ac0c7250fbccbc1",
+    "skill_name": "example-capture",
+    "skill_source": "pi-runtime",
+    "skill_content_hash": "sha256:6daf9be98ecf8f73a9ebfd6e70f20882e55712d4168ad65f49b066092df1dc33",
+    "trigger": "explicit-command",
+    "evidence_type": "explicit-command",
+    "evidence_confidence": "observed",
+    "status": "loaded",
+    "timestamp": "2026-07-18T20:10:00Z"
+  },
+  "persistence_valid_but_not_operational": {
+    "schema_version": 1,
+    "event_name": "agent.skill.activation",
+    "agent_system": "pi",
+    "skill_name": "example-capture",
+    "skill_source": "pi-runtime",
+    "trigger": "explicit-command",
+    "evidence_type": "explicit-command",
+    "evidence_confidence": "observed",
+    "status": "loaded",
+    "timestamp": "2026-07-18T20:10:00Z"
+  }
+}

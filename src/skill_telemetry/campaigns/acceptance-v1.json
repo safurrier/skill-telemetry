@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "campaign_id": "cross-runtime-skill-acceptance-v1",
+  "observations": "acceptance-observations-v1.json",
+  "cases": [
+    {
+      "case_id": "pi-explicit",
+      "runtime": "pi",
+      "runtime_version": "0.80.10",
+      "expected_skill": "example-capture",
+      "invocation_type": "explicit",
+      "evidence_stage": "activation",
+      "required_outcomes": [
+        "explicit-command"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "pi-candidate-load",
+      "runtime": "pi",
+      "runtime_version": "0.80.10",
+      "expected_skill": "example-capture",
+      "invocation_type": "natural-language",
+      "evidence_stage": "candidate-to-load",
+      "required_outcomes": [
+        "natural-language-candidate",
+        "canonical-file-read"
+      ],
+      "forbidden_outcomes": [
+        "provenance-error"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "pi-negative-control",
+      "runtime": "pi",
+      "runtime_version": "0.80.10",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "activation",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "explicit-command",
+        "natural-language-candidate",
+        "canonical-file-read"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "pi-resume-reimport",
+      "runtime": "pi",
+      "runtime_version": "0.80.10",
+      "expected_skill": "example-capture",
+      "invocation_type": "resume-reimport",
+      "evidence_stage": "activation",
+      "required_outcomes": [
+        "explicit-command"
+      ],
+      "forbidden_outcomes": [
+        "provenance-error"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-metric-explicit",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": "example-capture",
+      "invocation_type": "explicit",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [
+        "native-metric"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-metric-implicit-read",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": "example-capture",
+      "invocation_type": "implicit",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [
+        "native-metric"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-metric-implicit-script",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": "example-capture",
+      "invocation_type": "implicit",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [
+        "native-metric"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-metric-batched-delta",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": "example-capture",
+      "invocation_type": "explicit",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [
+        "native-metric"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-negative-control",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "native-metric",
+        "structured-input",
+        "explicit-command",
+        "canonical-file-read"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-unknown-skill-control",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "native-metric"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-unrelated-file-control",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "native-metric"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "codex-unrelated-script-control",
+      "runtime": "codex",
+      "runtime_version": "0.144.5",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "aggregate-activation",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "native-metric"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "claude-hook-explicit",
+      "runtime": "claude",
+      "runtime_version": "2.1.211",
+      "expected_skill": "example-writing",
+      "invocation_type": "explicit",
+      "evidence_stage": "named-hook",
+      "required_outcomes": [
+        "explicit-command"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "claude-hook-structured",
+      "runtime": "claude",
+      "runtime_version": "2.1.211",
+      "expected_skill": "example-writing",
+      "invocation_type": "model-selected",
+      "evidence_stage": "named-hook",
+      "required_outcomes": [
+        "structured-hook"
+      ],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "claude-non-skill-command",
+      "runtime": "claude",
+      "runtime_version": "2.1.211",
+      "expected_skill": null,
+      "invocation_type": "negative-control",
+      "evidence_stage": "named-hook",
+      "required_outcomes": [],
+      "forbidden_outcomes": [
+        "explicit-command",
+        "structured-hook"
+      ],
+      "unobservable_outcomes": []
+    },
+    {
+      "case_id": "claude-native-redacted",
+      "runtime": "claude",
+      "runtime_version": "2.1.211",
+      "expected_skill": "example-writing",
+      "invocation_type": "explicit",
+      "evidence_stage": "native-event",
+      "required_outcomes": [],
+      "forbidden_outcomes": [],
+      "unobservable_outcomes": [
+        "native-skill-identity"
+      ]
+    }
+  ]
+}

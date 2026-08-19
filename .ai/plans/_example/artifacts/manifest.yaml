@@ -1,0 +1,7 @@
+artifacts:
+  - type: report
+    path: artifacts/release-review.md
+    note: Summary of the release-confidence walkthrough
+  - type: log
+    path: artifacts/integration.log
+    note: Captured integration test output for the auth flow

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skill-telemetry.local/schema/envelope-v1.json",
+  "description": "Finite-command JSON envelope. Success data is selected by command; errors are uniform.",
+  "type": "object",
+  "required": ["schema_version", "command", "tool_version", "status", "data", "warnings", "unsupported"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "command": {"enum": ["version", "doctor", "readout", "usage", "ingest.pi", "ingest.codex", "evaluate", "serve"]},
+    "tool_version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ok", "error", "partial", "failed"]},
+    "data": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "unsupported": {"type": "array", "items": {"type": "string"}}
+  },
+  "oneOf": [
+    {"properties": {"status": {"const": "error"}, "data": {"$ref": "command-data-v1.json#/$defs/error"}}},
+    {"properties": {"command": {"const": "version"}, "status": {"const": "ok"}, "data": {"$ref": "command-data-v1.json#/$defs/version"}}},
+    {"properties": {"command": {"const": "doctor"}, "status": {"const": "ok"}, "data": {"$ref": "command-data-v1.json#/$defs/doctor"}}},
+    {"properties": {"command": {"const": "readout"}, "status": {"const": "ok"}, "data": {"$ref": "command-data-v1.json#/$defs/readout"}}},
+    {"properties": {"command": {"const": "usage"}, "status": {"const": "ok"}, "data": {"$ref": "command-data-v1.json#/$defs/usage"}}},
+    {"properties": {"command": {"enum": ["ingest.pi", "ingest.codex"]}, "status": {"enum": ["ok", "partial"]}, "data": {"$ref": "command-data-v1.json#/$defs/ingest"}}},
+    {"properties": {"command": {"const": "evaluate"}, "status": {"enum": ["ok", "failed"]}, "data": {"$ref": "command-data-v1.json#/$defs/evaluate"}}},
+    {"properties": {"command": {"const": "serve"}, "status": {"const": "ok"}, "data": {"$ref": "command-data-v1.json#/$defs/serve"}}}
+  ]
+}

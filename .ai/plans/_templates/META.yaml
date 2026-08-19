@@ -1,0 +1,17 @@
+slug: {{slug}}
+branch: {{branch}}
+created: {{created}}
+pr:
+status: planned
+source:
+contract_change: implementation_only
+decision_record: none
+review_mode: external_required
+review_backend:
+review_rubrics:
+  - core-quality
+evidence_required:
+  - commands
+  - report
+continues_from:
+supersedes:

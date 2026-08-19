@@ -1,0 +1,10 @@
+{
+  "event_name": "claude_code.skill_activated",
+  "timestamp": "2026-07-17T12:00:00Z",
+  "attributes": {
+    "session.id": "sanitized-fixture-session",
+    "prompt.id": "sanitized-fixture-turn",
+    "skill_name": "example-capture",
+    "trigger": "explicit"
+  }
+}

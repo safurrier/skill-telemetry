@@ -1,0 +1,19 @@
+[
+  {"id": "unknown-field", "patch": {"prompt": "not-retained"}},
+  {"id": "schema-version", "patch": {"schema_version": 2}},
+  {"id": "metric-name", "patch": {"metric_name": "codex.turn.other"}},
+  {"id": "metric-kind", "patch": {"metric_kind": "sum"}},
+  {"id": "temporality", "patch": {"aggregation_temporality": "gauge"}},
+  {"id": "unit-unknown", "patch": {"unit": "tokens"}},
+  {"id": "unit-secret-like", "patch": {"unit": "sk-proj-PRIVATE123"}},
+  {"id": "unit-absolute-path", "patch": {"unit": "/private/telemetry/tokens"}},
+  {"id": "token-type", "patch": {"token_type": "private-model-name"}},
+  {"id": "cumulative-zero-start", "patch": {"start_time_unix_nano": 0}},
+  {"id": "zero-time", "patch": {"time_unix_nano": 0}},
+  {"id": "negative-count", "patch": {"count": -1}},
+  {"id": "oversize-count", "patch": {"count": 1000000000001}},
+  {"id": "negative-sum", "patch": {"sum": -1}},
+  {"id": "empty-buckets", "patch": {"count": 0, "bucket_counts": [], "explicit_bounds": []}},
+  {"id": "negative-bucket", "patch": {"bucket_counts": [-1, 3]}},
+  {"id": "duplicate-bounds", "patch": {"count": 3, "bucket_counts": [1, 1, 1], "explicit_bounds": [10, 10]}}
+]

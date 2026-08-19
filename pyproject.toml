@@ -1,0 +1,59 @@
+[project]
+name = "skill-telemetry"
+version = "0.1.0"
+description = "Privacy-preserving local skill telemetry"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+authors = [{ name = "skill-telemetry contributors" }]
+dependencies = [
+    "cyclopts>=4.22,<5",
+    "ijson>=3.3,<4",
+    "jsonschema>=4.23,<5",
+    "opentelemetry-proto>=1.29,<2",
+    "protobuf>=5,<7",
+]
+
+[project.scripts]
+skill-telemetry = "skill_telemetry.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.11",
+    "ty>=0.0.19",
+    "pytest-xdist>=3.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/skill_telemetry"]
+
+[tool.hatch.build]
+include = ["src/skill_telemetry/**", "LICENSE"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+extend-exclude = [".agent/skills/"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP", "N", "S", "PTH", "RUF"]
+ignore = ["E501", "S101", "N818", "PTH105", "PTH108", "S105", "UP046"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["skill_telemetry"]
+
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+exclude = [".agent/skills/**"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-n auto --dist=loadfile --cov=skill_telemetry --cov-report=term-missing --cov-fail-under=85 --junit-xml=test-results/junit.xml -q"

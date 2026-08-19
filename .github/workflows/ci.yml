@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    name: Python quality and artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run setup
+      - run: mise run public-history
+      - run: mise run fmt-check
+      - run: mise run lint
+      - run: mise run typecheck
+      - run: mise run test
+      - run: mise run python-build
+      - run: mise run version-contract
+
+  pi:
+    name: Pi package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run node-check
+
+  sync-check:
+    name: Sync contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: jdx/mise-action@v2
+      - run: mise run sync-check -- --changed-plans origin/main...HEAD

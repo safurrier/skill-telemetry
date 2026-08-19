@@ -1,0 +1,18 @@
+{
+  "client_version": "2.1.211",
+  "resource_attributes": {
+    "service.name": "claude-code"
+  },
+  "record": {
+    "attributes": {
+      "event.name": "skill_activated",
+      "session.id": "sanitized-live-session",
+      "prompt.id": "sanitized-live-turn",
+      "skill_name": "custom_skill"
+    }
+  },
+  "expected": {
+    "signal_name": "claude_code.skill_activated",
+    "status": "identity-redacted"
+  }
+}
