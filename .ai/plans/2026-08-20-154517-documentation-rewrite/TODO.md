@@ -17,4 +17,4 @@ description: Checkable tasks for the documentation rewrite.
 - [x] Rerun writing checks and complete bounded readability passes for normal samples.
 - [x] Complete independent semantic-preservation and information-architecture review.
 - [x] Run full repository validation and artifact proof.
-- [ ] Open the documentation pull request and wait for CI/review.
+- [x] Open documentation PR #1; CI and automated review are tracked by the PR workflow.
