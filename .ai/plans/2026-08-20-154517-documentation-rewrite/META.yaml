@@ -1,0 +1,18 @@
+slug: documentation-rewrite
+branch: docs/rewrite-public-documentation
+created: 2026-08-20
+pr:
+status: in-progress
+source: user-request
+contract_change: docs_only
+decision_record: ledger
+review_mode: external_required
+review_backend: subagent
+review_rubrics:
+  - core-quality
+  - docs-info-architecture
+evidence_required:
+  - commands
+  - report
+continues_from:
+supersedes:

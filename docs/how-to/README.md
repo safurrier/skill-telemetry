@@ -1,17 +1,31 @@
 ---
 id: skill-telemetry-how-to
-title: skill-telemetry How-To Guides
-description: >
-  Task-oriented recipes for working in skill-telemetry.
+title: How-to guides
+description: Task-oriented recipes for operating and contributing to skill-telemetry.
 index:
-  - id: recipes
-    keywords: [how-to, recipes, tasks, workflows]
+  - id: collector
+    keywords: [serve, doctor, otlp, loopback]
+  - id: ingest
+    keywords: [pi, codex, dry-run, import]
+  - id: read
+    keywords: [readout, usage, state]
+  - id: develop
+    keywords: [mise, check, release, public-history]
 ---
 
-# How-To Guides
+# How-to guides
 
-Add short, task-oriented guides here as the repo develops:
+Choose the outcome you need:
 
-- operating a local dev loop
-- running release checks
-- debugging common failure modes
+- [Run the foreground collector](run-the-collector.md) and verify its loopback
+  listener.
+- [Import explicit Pi or Codex evidence](import-evidence.md) with a dry run,
+  bounded inputs, and clear partial-result handling.
+- [Read local skill and usage results](read-local-results.md) without importing
+  new data or overstating attribution.
+- [Develop and verify a release](develop-and-release.md) through the repository's
+  mise task surface and publication checks.
+
+For a complete first-use sequence, start with the
+[first local run](../tutorials/first-local-run.md). For exact options and stable
+facts, use the [reference index](../reference/README.md).

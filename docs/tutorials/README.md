@@ -1,16 +1,19 @@
 ---
 id: skill-telemetry-tutorials
-title: skill-telemetry Tutorials
-description: >
-  Placeholder for guided tutorials in skill-telemetry.
+title: Tutorials
+description: Guided, learn-by-doing paths for first use of skill-telemetry.
 index:
-  - id: tutorials
-    keywords: [tutorials, guided, learn-by-doing]
+  - id: first-local-run
+    keywords: [install, evaluate, serve, doctor, readout]
 ---
 
 # Tutorials
 
-No tutorials yet.
+Tutorials provide complete learning sequences. Use the
+[first local run](first-local-run.md) to install a reviewed release, run the
+packaged evaluation, start the loopback receiver, check it, and inspect isolated
+empty state.
 
-Add documents here when a workflow is best taught step-by-step rather than as a
-reference page or a how-to.
+After that walkthrough, switch to the [how-to guides](../how-to/README.md) for a
+specific task or the [reference pages](../reference/README.md) for exact command,
+state, and support details.
