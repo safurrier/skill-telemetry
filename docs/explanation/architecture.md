@@ -20,20 +20,37 @@ commands, record rules, adapters, local files, OTLP receiver, reports, and packa
 evaluation. TypeScript owns Pi event matching and writes safe custom entries into
 Pi sessions. Python can import those entries later from a path the caller names.
 
-## Data flow
+## Animated system map
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/architecture/skill-telemetry-architecture.svg">
+  <img src="../assets/architecture/skill-telemetry-architecture-animation.gif" alt="Animated two-lane architecture map. Packaged campaigns use only the Python evaluator. Pi lifecycle events pass through Pi extension matching into retained skill-telemetry-v1 custom entries and later explicit ingest. Selected Pi and Codex files also use explicit ingest; Claude hook input uses a privacy adapter. OTLP logs enter only the skill path. OTLP metrics split into independent skill-metric and token-usage adapters. Stage-preserving skill evidence and token usage stay in separate ledgers and readouts.">
+</picture>
+
+[Download the self-contained player](../assets/architecture/skill-telemetry-architecture-animated.html) ·
+[Watch MP4](../assets/architecture/skill-telemetry-architecture-animation.mp4) ·
+[View static SVG](../assets/architecture/skill-telemetry-architecture.svg) ·
+[Edit the Excalidraw source](../assets/architecture/skill-telemetry-architecture.excalidraw)
+
+The two swimlanes show a deliberate boundary. Live and explicitly imported evidence
+can reach the local stores. Packaged campaign data reaches only the Python evaluator.
+The color sequence follows input, normalization, retained state, and read surfaces.
+
+## Text data flow
 
 ```text
-Pi lifecycle events ───────────────> Pi custom session entries
-                                              │ explicit ingest
-Pi files ──────────┐                           v
-Codex files ────────> bounded discovery + adapters ─> skill files ─> readout
-Claude hook stdin ─┘
+Pi lifecycle -> Pi extension matching -> custom skill-telemetry-v1 entries
+                                                    │ caller-selected Pi file
+Pi files ──────────┐                                 v
+Codex files ────────> bounded explicit ingest -> stage-preserving gate
+Claude hook stdin ──> privacy adapter ─────────> stage-preserving gate
+/v1/logs ───────────> skill logs adapter ──────> stage-preserving gate
+/v1/metrics ─────────> skill metric adapter ───> stage-preserving gate
+stage-preserving gate -> skill ledger -> readout
 
-OTLP /v1/logs   ─┐
-OTLP /v1/metrics ─> loopback receiver ─> skill files
-                                      └> usage files ─> usage
+/v1/metrics -> token usage adapter -> usage ledger -> usage
 
-packaged campaign records ─> evaluator ─> schema-v1 JSON
+packaged campaign records -> evaluator -> schema-v1 JSON
 ```
 
 The receiver also serves `/healthz`. It stays in the foreground, accepts literal

@@ -35,6 +35,25 @@ uv tool install \
 
 Never install from a moving branch.
 
+## Architecture at a glance
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/architecture/skill-telemetry-architecture.svg">
+  <img src="docs/assets/architecture/skill-telemetry-architecture-animation.gif" alt="Animated two-lane architecture map. Packaged campaigns use only the Python evaluator. Pi lifecycle events pass through Pi extension matching into retained skill-telemetry-v1 custom entries and later explicit ingest. Selected Pi and Codex files also use explicit ingest; Claude hook input uses a privacy adapter. OTLP logs enter only the skill path. OTLP metrics split into independent skill-metric and token-usage adapters. Stage-preserving skill evidence and token usage stay in separate ledgers and readouts.">
+</picture>
+
+[Download the self-contained player](docs/assets/architecture/skill-telemetry-architecture-animated.html) ·
+[Watch MP4](docs/assets/architecture/skill-telemetry-architecture-animation.mp4) ·
+[View static SVG](docs/assets/architecture/skill-telemetry-architecture.svg) ·
+[Edit the Excalidraw source](docs/assets/architecture/skill-telemetry-architecture.excalidraw)
+
+The animation reveals inputs, normalization, storage, and readouts in order. Yellow
+marks inputs, blue marks normalization, green marks retained state, and orange marks
+read surfaces. The packaged evaluator stays in its own lane because it checks a
+sanitized contract rather than a live runtime. See the
+[architecture explanation](docs/explanation/architecture.md) for the failure and
+privacy boundaries behind the map.
+
 ## Choose how to collect evidence
 
 | Path | Input | Retained state write | Main limit |
@@ -53,13 +72,6 @@ pi install git:github.com/safurrier/skill-telemetry@v0.1.0
 The package isn't published to npm.
 
 ## Understand the result
-
-```text
-Pi or Codex files -> bounded ingest -> skill ledger -> readout
-OTLP logs/metrics -> local receiver -> skill and usage ledgers
-Claude hook stdin -> fail-open hook -> skill ledger
-Pi lifecycle      -> Pi extension   -> Pi session entries
-```
 
 The tool keeps each evidence stage separate. An activation, explicit command,
 prompt expansion, canonical read, candidate, aggregate metric, and generic runtime

@@ -1,0 +1,19 @@
+artifacts:
+  - path: artifacts/diagram-validation-summary.md
+    type: report
+    description: Concise topology, accessibility, playback, visual, semantic, and test evidence.
+  - path: artifacts/reduced-motion-complete.png
+    type: screenshot
+    description: Completed wide scene with reduced-motion state and status.
+  - path: artifacts/narrow-complete-left.png
+    type: screenshot
+    description: Narrow viewport at the left edge with readable fixed-width panning.
+  - path: artifacts/narrow-complete-right.png
+    type: screenshot
+    description: Narrow viewport scrolled to the right edge, proving full scene access.
+  - path: artifacts/dark-complete.png
+    type: screenshot
+    description: Completed scene in dark color-scheme player chrome.
+  - path: artifacts/video-final-frame.png
+    type: screenshot
+    description: Completed final frame decoded from the accelerated MP4.
