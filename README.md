@@ -182,7 +182,6 @@ evidence.
 ```bash
 mise run setup       # install locked development dependencies
 mise run check       # routine repository checks
-mise run sync-check  # contribution-plan handoff checks
 mise run verify      # CI plus wheel and source-archive proof
 ```
 

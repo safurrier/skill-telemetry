@@ -115,6 +115,6 @@ agent.
 
 ## Project checks
 
-Use `mise run check` for routine work. Use `mise run sync-check` for contribution
-handoff. Use `mise run verify` when a release or merge needs wheel and source
-archive proof. Every release ref must also pass `mise run public-history`.
+Use `mise run check` for routine work. Use `mise run verify` when a release or
+merge needs wheel and source archive proof. Every release ref must also pass
+`mise run public-history`.

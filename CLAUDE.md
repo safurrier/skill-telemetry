@@ -1,6 +1,6 @@
 # skill-telemetry
 
-Privacy-preserving local telemetry for agent skill activation evidence
+Privacy-preserving local telemetry for agent skill activation evidence.
 
 ## WHY
 
@@ -8,104 +8,63 @@ Agent runtimes expose different evidence for skill activation, loading, and usag
 This project normalizes only content-safe signals into bounded local stores without
 turning candidates, file reads, or aggregate metrics into stronger attribution.
 
-**Done means**: `mise run check` passes, `mise run sync-check` validates the
-active or changed contribution plan, and intended behavior is covered by the
-appropriate test layer.
+**Done means:** the relevant focused checks pass, `mise run check` passes before
+publication, and behavior changes include regression coverage. Use `mise run verify`
+when a change affects packaging, release artifacts, or public installation.
 
-Correctness invariants live in [`SPEC.md`](SPEC.md). Durable system design and
-decision history live under [`docs/explanation/`](docs/explanation/README.md).
+Normative behavior lives in [`SPEC.md`](SPEC.md). Current design and decisions live
+under [`docs/explanation/`](docs/explanation/README.md).
 
 ## WHAT
 
-```
+```text
 skill-telemetry/
-├── src/skill_telemetry/    # Python source
+├── src/skill_telemetry/    # Python CLI, contracts, collector, stores, readouts
 ├── pi/                     # Pi extension package
-├── tests/                  # Python test suite
-├── .mise.toml              # Task runner config
-├── pyproject.toml          # Python project config
-└── README.md
+├── tests/                  # Python behavior, privacy, docs, and artifact tests
+├── docs/                   # Tutorials, how-to, explanation, and reference
+├── scripts/                # Public-history, artifact, and diagram helpers
+├── .mise.toml              # Stable task interface
+├── pyproject.toml          # Python package metadata
+└── package.json            # Pi package metadata
 ```
 
-Key steering files:
-- `AGENTS.md` — this file (steering index)
-- `SPEC.md` — correctness envelope (requirements, contracts, invariants)
-- `docs/AGENTS.md` — docs routing index
-- `docs/explanation/architecture.md` — system description, principles, decisions
-- `docs/explanation/decision-ledger.md` — append-only durable decision history
-- `docs/reference/review-rubrics/` — reusable review standards
-- `.agent/skills/slice-workflow/` — vendored sync-check implementation
+Key sources:
+
+- `SPEC.md` — supported behavior and invariants
+- `docs/AGENTS.md` — documentation routing rules
+- `docs/explanation/architecture.md` — system mechanisms and failure model
+- `docs/explanation/decision-ledger.md` — durable decision history
+- `docs/reference/review-rubrics/` — optional project-specific review lenses
 
 ## HOW
 
 ```bash
-mise run setup      # install tools and dependencies (one-time)
-mise run check      # fast quality gate: fmt + lint + typecheck + test  ← before committing
-mise run sync-check # plan/spec/evidence/review handoff gate            ← before handing off or pushing
-mise run verify     # CI gate plus Python artifact proof  ← before merging
+mise run setup      # install locked development dependencies
+mise run check      # history, format, lint, type, Python/Pi tests, version contract
+mise run verify     # check plus wheel/sdist build and installed-command proof
 ```
 
-CI calls `mise run ci` (= `check`, including reachable-history scanning) and
-changed-plan `sync-check`. An initial public `main` with no plan passes the
-changed-plan check; future pull requests with meaningful changes must include a
-completed changed plan. `sync-check` is a handoff completion gate, not a
-replacement for code/test validation.
+### Working rules
 
-## Stack: python
+1. Create a focused branch; keep canonical `main` clean.
+2. Read the nearest guidance and the source that owns each claim before editing.
+3. Run focused tests while working, then `mise run check` before pushing.
+4. Update `SPEC.md`, architecture, reference docs, or the decision ledger when a
+   durable contract or design choice changes.
+5. Use fresh-context review for broad, security/privacy-sensitive, cross-language,
+   or release-facing changes. Keep lightweight docs and maintenance changes
+   proportional.
+6. Run `mise run verify` for release, packaging, artifact, or installation changes.
 
-- Formatter: ruff format (line-length 88)
-- Linter: ruff check (E, W, F, I, B, C4, UP, N, S, PTH, RUF)
-- Type checker: ty (error-on-warning)
-- Tests: pytest with coverage
+### Public releases
 
-## Starting Work
+- Publish only refs that pass `mise run public-history`.
+- Inspect the Git graph separately when a release requires a parentless history;
+  the scanner validates reachable content, not commit count.
+- Install Python and Pi from a reviewed full commit SHA or release tag.
+- Do not claim PyPI or npm publication.
 
-```bash
-git checkout -b feat/demo-work
-mise run plan -- demo-work    # creates .ai/plans/YYYY-MM-DD-HHmmSS-demo-work/
-mise -q run slice-status -- --json # inspect active slice state as JSON
-```
-
-`mise run plan` refuses to run on the default branch. Slugs must be lowercase
-kebab-case and unique within `.ai/plans/`.
-
-The task scaffolds META.yaml, TODO.md, LEARNING_LOG.md, VALIDATION.md,
-REVIEW.md, DECISIONS.md, and `artifacts/manifest.yaml`. Add SPEC.md or
-IMPLEMENTATION.md if the work is complex.
-
-See `.ai/plans/AGENTS.md` for the full plan structure and `_example/` for a reference.
-
-## Before Handoff Or Push
-
-1. `mise run check` — must pass
-2. Update the active plan: TODO, LEARNING_LOG, DECISIONS, VALIDATION, REVIEW, artifacts
-3. `mise run sync-check` — repo-enforced handoff gate
-4. `mise run verify` — when the slice needs artifact proof before merge
-
-## Public releases
-
-- Publish only refs that pass `mise run public-history`; scan selected refs in a
-  temporary single-branch clone so local archive refs are never candidates.
-- Keep completed implementation plans, raw review evidence, and release notes
-  in local workflow storage rather than the release tree.
-- Install from a reviewed full Git commit SHA or release tag. Python and Pi are
-  Git-only; do not claim a package-registry release.
-
-The skills above are helpers. The hard contract is the `mise` task surface.
-
-## Skills
-
-The repository retains only the vendored `slice-workflow` implementation used
-by the `mise` sync-check tasks. Canonical truth stays in `docs/` and the active
-plan; personal authoring workflows are intentionally not part of this project.
-
-## Further Reading
-
-| Document | Purpose |
-|---|---|
-| `SPEC.md` | Correctness envelope — requirements, contracts, invariants |
-| `.ai/plans/` | Plan directories for units of work (see `.ai/plans/AGENTS.md`) |
-| `docs/explanation/architecture.md` | System description, principles, decisions |
-| `docs/explanation/decision-ledger.md` | Append-only durable decision trail |
-| `docs/reference/review-rubrics/` | Review standards for external review |
-| `README.md` | Human-oriented quick start |
+Repository tasks and CI are the hard checks. Local planning, notes, screenshots, and
+review transcripts belong in local workflow storage or the pull request, not in
+this repository.

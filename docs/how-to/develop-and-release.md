@@ -1,12 +1,12 @@
 ---
 id: skill-telemetry-how-to-develop-release
 title: Develop and verify a release
-description: Use the repository task surface for routine checks, handoff evidence, artifacts, and public refs.
+description: Use the repository task surface for routine checks, review, artifacts, and public refs.
 index:
   - id: setup
     keywords: [mise, dependencies, branch]
   - id: validate
-    keywords: [check, sync-check, verify, ci]
+    keywords: [check, review, verify, ci]
   - id: release
     keywords: [public-history, artifacts, git, tag]
 ---
@@ -18,19 +18,11 @@ dependencies, run tests, or create build output. They don't publish a release.
 
 ## Set up the checkout
 
-Create a feature branch before planning meaningful work, then install locked
-Python dependencies:
+Create a focused feature branch, then install locked Python dependencies:
 
 ```bash
 git switch -c <type>/<short-name>
 mise run setup
-```
-
-For a contribution that changes behavior or durable documentation, create and
-maintain the repository plan required by `AGENTS.md`:
-
-```bash
-mise run plan -- <lowercase-kebab-slug>
 ```
 
 ## Run the routine gate
@@ -54,17 +46,12 @@ mise run node-check
 mise run version-contract
 ```
 
-## Complete handoff evidence
+## Review before push
 
-Update the active plan's decisions, validation, review, and artifact manifest,
-then run:
-
-```bash
-mise run sync-check
-```
-
-This gate checks the changed contribution plan and its evidence. It doesn't
-replace source or test validation.
+Inspect the full diff, preserve command/test evidence in the pull request, and use
+fresh-context review when a change is broad, privacy-sensitive, cross-language, or
+release-facing. Keep local plans, screenshots, and raw review transcripts outside
+the repository unless they are the product artifact itself.
 
 ## Build release artifacts
 

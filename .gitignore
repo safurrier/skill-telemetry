@@ -36,17 +36,6 @@ Thumbs.db
 # mise
 .mise.local.toml
 
-# Agent scratch
-.ai/handoffs/
-.ai/research/
-.ai/plans/**/artifacts/**
-!.ai/plans/**/artifacts/
-!.ai/plans/**/artifacts/manifest.yaml
-!.ai/plans/**/artifacts/*.md
-!.ai/plans/**/artifacts/*.txt
-!.ai/plans/**/artifacts/*.log
-!.ai/plans/**/artifacts/*.png
-
 # Local workflow evidence and settings
 .harness-local/
 .claude/settings.local.json

@@ -39,7 +39,6 @@ include = ["src/skill_telemetry/**", "LICENSE"]
 [tool.ruff]
 target-version = "py312"
 line-length = 88
-extend-exclude = [".agent/skills/"]
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B", "C4", "UP", "N", "S", "PTH", "RUF"]
@@ -50,9 +49,6 @@ known-first-party = ["skill_telemetry"]
 
 [tool.ty.environment]
 python-version = "3.12"
-
-[tool.ty.src]
-exclude = [".agent/skills/**"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
