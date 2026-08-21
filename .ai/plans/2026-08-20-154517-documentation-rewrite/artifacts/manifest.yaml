@@ -1,0 +1,4 @@
+artifacts:
+  - path: artifacts/writing-check-summary.md
+    type: report
+    description: Corpus, profile, readability-pass, exclusion, and finding-disposition summary.
