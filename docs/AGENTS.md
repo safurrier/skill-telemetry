@@ -17,7 +17,7 @@ logs when you need the current repo truth.
 
 ## Rules
 
-- Durable truths live here, not in `.ai/plans/`.
+- Durable truths live here, not only in local plans, chat, or review notes.
 - Review rubrics are part of repo knowledge. Update them when standards improve.
 - Append to the decision ledger; do not rewrite history unless a human is
   correcting a mistake.

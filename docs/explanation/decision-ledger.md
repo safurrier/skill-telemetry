@@ -23,8 +23,8 @@ more context, alternatives, or consequences.
   and use reference pages for stable command, state, and support facts.
 - **Why:** the initial docs routed readers into contributor scaffolding while
   leaving the tutorial, how-to, and reference folders as placeholders.
-- **Boundary:** `AGENTS.md`, `.ai/plans/`, and review workflow remain contributor
-  material. They don't define product behavior.
+- **Boundary:** `AGENTS.md` and local review workflow remain contributor material.
+  Local plans and raw review evidence are not committed product documentation.
 - **Proof:** documentation tests cover every authored page. Command examples are
   checked against CLI help, source, and focused tests. Repository writing checks
   remain advisory.

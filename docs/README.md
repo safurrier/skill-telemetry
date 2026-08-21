@@ -55,8 +55,7 @@ operator and contributor material.
   tasks to routine work, handoff, and release proof.
 - [Review rubrics](reference/review-rubrics/README.md) provide optional,
   project-specific lenses for code, docs, performance, and CLI experience.
-- `AGENTS.md` and `.ai/plans/AGENTS.md` are contributor workflow instructions,
-  not product documentation.
+- `AGENTS.md` is contributor workflow guidance, not product documentation.
 
 ## Where truth lives
 
