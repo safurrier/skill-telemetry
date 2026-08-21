@@ -1,8 +1,8 @@
 slug: animated-architecture-diagram
 branch: docs/animated-architecture
 created: 2026-08-21
-pr:
-status: in-progress
+pr: 2
+status: complete
 source: user-request
 contract_change: docs_only
 decision_record: none

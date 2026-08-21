@@ -14,4 +14,4 @@ description: Tasks for the animated architecture diagram.
 - [x] Add source and generated-asset contract tests.
 - [x] Complete independent semantic and visual review.
 - [x] Run full validation and artifact checks.
-- [ ] Open the pull request and wait for CI/review.
+- [x] Open PR #2; CI and automated review are tracked by the PR workflow.
